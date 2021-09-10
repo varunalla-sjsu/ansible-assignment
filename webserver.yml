@@ -1,7 +1,18 @@
--
+-   #Deploy Section
     name: 'Deploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
-    
--
-    name: 'Un deploy Webserver which provides service that displays the message "Hello World from SJSU"'
+    #do required tasks with escalated priviliges.
+    tasks:
+        -   #install httpdservice.
+        -   # start the service.
+        -   # make sure the landing page with the message "Hello World from SJSU" exists.
+        -   # make sure firewall is open for port 80.
+        -   # make sure the message is displayed when the resource is requested.
+    tags: 'deploy'   
+-   #UnDeploy Section
+    name: 'Undeploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
+    tasks:
+        - #block firewall access to port 80.
+        - #stop the httpd service.
+    tags: 'undeploy'
