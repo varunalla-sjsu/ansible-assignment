@@ -1,0 +1,7 @@
+-
+    name: 'Deploy Webserver which provides service that displays the message "Hello World from SJSU"'
+    hosts: web_servers
+    
+-
+    name: 'Un deploy Webserver which provides service that displays the message "Hello World from SJSU"'
+    hosts: web_servers
