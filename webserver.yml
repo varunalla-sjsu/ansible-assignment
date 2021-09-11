@@ -6,20 +6,13 @@
         -   #install httpdservice.
         -   # start the service.
         -   # make sure the landing page with the message "Hello World from SJSU" exists.
+        name:To write index.html
+        copy:
+           content: 'Hello World from SJSU.'
+           dest: "/var/www/html/index.html"
         -   # make sure firewall is open for port 80.
         -   # make sure the message is displayed when the resource is requested.
-        name: 'To display the message when the resource is requested'
-        - set_fact:
-            host_id: 1
-          when: ansible_default_ipv4.address == '198.168.56.103'
-        - set_fact:
-            host_id: 2
-          when: ansible_default_ipv4.address == '198.168.56.104'  
-       
-        - name: To write index.html
-          copy:
-            content: 'Hello world from server{{host_id}}.'
-            dest: "/var/www/html/index.html"
+    tags: 'deploy'   
 -   #UnDeploy Section
     name: 'Undeploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
