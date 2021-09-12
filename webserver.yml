@@ -1,26 +1,47 @@
 -   #Deploy Section
     name: 'Deploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
-    #do required tasks with escalated priviliges.
     tasks:
-        -   #install httpdservice.
+        -
+            name: "Install httpd service"
+            yum: 
+                name: httpd
+                state: present
+       
         -   # start the service.
+            name: "Start web server"
+            service: 
+                name: httpd
+                state: started
+       
         -   # make sure the landing page with the message "Hello World from SJSU" exists.
-        name: To write index.html
-        copy:
-           content: 'Hello World from SJSU.'
-           dest: "/var/www/html/index.html"
+            name: create content
+            copy:
+                content: "Hello World from SJSU"
+                dest: /var/www/html/index.html
+                mode: 0644
+             
         -   # make sure firewall is open for port 80.
-        name: Enable firewall
-        firewalld:
-            port: 80/tcp
-            state: enabled
+            name: Enable firewall
+            firewalld:
+                port: 80/tcp
+                state: enabled
         -   # make sure the message is displayed when the resource is requested.
+        
     tags: 'deploy'   
 -   #UnDeploy Section
     name: 'Undeploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
     tasks:
         - #block firewall access to port 80.
-        - #stop the httpd service.
+            name: 'block firewall access to port 80'
+            firewalld:
+                port: 80/tcp
+                state: disabled
+        - #stop the httpd service. 
+            name: 'Stop the httpd service'
+            service:
+                name: httpd
+                state: stopped
+        
     tags: 'undeploy'
