@@ -1,11 +1,27 @@
+
 -   #Deploy Section
     name: 'Deploy Webserver which provides service that displays the message "Hello World from SJSU"'
     hosts: web_servers
     #do required tasks with escalated priviliges.
     tasks:
-        -   #install httpdservice.
-        -   # start the service.
-        -   # make sure the landing page with the message "Hello World from SJSU" exists.
+       -   #install httpdservice.
+          name: "Install httpd service"
+          yum: 
+             name: httpd
+             state: latest
+       
+       -   # start the service.
+          name: "Start web server"
+          service: 
+             name: httpd
+             state: started
+       
+       -   # make sure the landing page with the message "Hello World from SJSU" exists.
+          name: create content
+          copy:
+             content: "Hello World from SJSU"
+             dest: /var/www/html/index.html
+             
         -   # make sure firewall is open for port 80.
         -   # make sure the message is displayed when the resource is requested.
     tags: 'deploy'   
