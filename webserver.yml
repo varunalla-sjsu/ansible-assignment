@@ -6,11 +6,15 @@
         -   #install httpdservice.
         -   # start the service.
         -   # make sure the landing page with the message "Hello World from SJSU" exists.
-        name:To write index.html
+        name: To write index.html
         copy:
            content: 'Hello World from SJSU.'
            dest: "/var/www/html/index.html"
         -   # make sure firewall is open for port 80.
+        name: Enable firewall
+        firewalld:
+            port: 80/tcp
+            state: enabled
         -   # make sure the message is displayed when the resource is requested.
     tags: 'deploy'   
 -   #UnDeploy Section
