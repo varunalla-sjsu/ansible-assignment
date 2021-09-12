@@ -7,4 +7,16 @@
 * Three Servers(or machines) with ansible installed on machine1(VM1) 
 * user with sudo role on the webservers machine2(VM2) and machine3(VM3) for example ansibleuser
 * make sure python is installed on those servers
+## Pre-Setup
+* Replace the vm2 and vm3 ansible_host values from hostinventory.cfg
+* Replace the serviceuser with user who has superuser access for respective vms in hostinventory.cfg
+* Replace the ssh private key location for respective vms in hostinventory.cfg
 ## To Execute
+#### To Deploy Webserver and the resources
+```
+ansible-playbook -i hostinventory.cfg webserver.yaml --tags "deploy"
+```
+#### To Deploy Webserver and the resources
+```
+ansible-playbook -i hostinventory.cfg webserver.yaml --tags "undeploy"
+```
