@@ -16,7 +16,7 @@
 ```
 ansible-playbook -i hostinventory.cfg webserver.yaml --tags "deploy"
 ```
-#### To Deploy Webserver and the resources
+#### To Undeploy Webserver and the resources
 ```
 ansible-playbook -i hostinventory.cfg webserver.yaml --tags "undeploy"
 ```
